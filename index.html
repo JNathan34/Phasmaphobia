@@ -1,0 +1,703 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phasmophobia | Ghost Identification Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Teko:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="hero-header">
+        <div class="container hero-shell">
+            <nav class="top-nav" aria-label="Primary">
+                <a href="#quick-reference" class="nav-link">Quick Start</a>
+                <a href="#ghost-guide" class="nav-link">Ghosts</a>
+                <a href="#cursed-possessions-guide" class="nav-link">Cursed Items</a>
+                <a href="#equipment-guide" class="nav-link">Equipment</a>
+                <a href="#maps-guide" class="nav-link">Maps</a>
+            </nav>
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <p class="eyebrow">Current Contract Guide</p>
+                    <h1>Phasmophobia Field Guide</h1>
+                    <p class="hero-text">Ghost tells, cursed item routes, equipment tiers, and a current map planner built to make contracts faster to read mid-run.</p>
+                    <div class="hero-actions">
+                        <a href="#ghost-guide" class="btn">Ghost Directory</a>
+                        <a href="#maps-guide" class="btn btn-secondary">Map Planner</a>
+                    </div>
+                </div>
+                <aside class="hero-panel">
+                    <p class="panel-label">Guide Snapshot</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span id="hero-ghost-count" class="hero-stat-value">24</span>
+                            <span class="hero-stat-label">Ghosts</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span id="hero-map-count" class="hero-stat-value">14</span>
+                            <span class="hero-stat-label">Maps</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-value">7</span>
+                            <span class="hero-stat-label">Evidence Types</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-value">3</span>
+                            <span class="hero-stat-label">Map Sizes</span>
+                        </div>
+                    </div>
+                    <p class="hero-note">Map roster cross-checked on March 5, 2026, including the current Nell's Diner entry and the reworked 6 Tanglewood Drive layout.</p>
+                </aside>
+            </div>
+            <div class="hero-tools">
+                <label class="search-label" for="search-bar">Search ghosts, tells, and hunt behavior</label>
+                <input type="text" id="search-bar" placeholder="Search for a ghost, clue, or behavior...">
+                <div id="evidence-filter-container">
+                    <button class="evidence-filter-btn" data-evidence="EMF Level 5">EMF 5</button>
+                    <button class="evidence-filter-btn" data-evidence="Spirit Box">Spirit Box</button>
+                    <button class="evidence-filter-btn" data-evidence="Ghost Writing">Writing</button>
+                    <button class="evidence-filter-btn" data-evidence="Ghost Orb">Orbs</button>
+                    <button class="evidence-filter-btn" data-evidence="Freezing Temperatures">Freezing</button>
+                    <button class="evidence-filter-btn" data-evidence="Ultraviolet">UV</button>
+                    <button class="evidence-filter-btn" data-evidence="D.O.T.S Projector">DOTS</button>
+                </div>
+                <div class="toolbar-row">
+                    <button id="reset-filters-btn">Reset Filters</button>
+                    <p id="ghost-results-text" class="results-text">Showing all ghosts.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="quick-reference" class="container overview-section">
+        <div class="section-heading">
+            <p class="eyebrow">Quick Start</p>
+            <h2>Contract Flow</h2>
+            <p class="section-copy">Use this to move from truck setup to a clean identification without digging through every section in the middle of a hunt.</p>
+        </div>
+        <div class="overview-grid">
+            <article class="overview-card">
+                <p class="overview-kicker">Openers</p>
+                <h3>First Trip</h3>
+                <ul class="clean-list">
+                    <li>Lead with Thermometer, EMF, and UV on houses and farmhouses.</li>
+                    <li>On medium and large maps, split the first sweep and keep one player watching sanity and sensors.</li>
+                    <li>Drop a camera early so Orbs and DOTS keep working while you rotate tools.</li>
+                </ul>
+            </article>
+            <article class="overview-card">
+                <p class="overview-kicker">Hunt Reads</p>
+                <h3>When Evidence Stalls</h3>
+                <ul class="clean-list">
+                    <li>Read speed, line-of-sight behavior, and electronics range before forcing more evidence.</li>
+                    <li>Watch breaker state, salt footsteps, and whether the ghost hard-targets one player.</li>
+                    <li>Smudge first, then break sight or loop only when the ghost behavior supports it.</li>
+                </ul>
+            </article>
+            <article class="overview-card">
+                <p class="overview-kicker">Truck Tools</p>
+                <h3>Read the Site Map</h3>
+                <ul class="clean-list">
+                    <li>The truck site map tracks player positions, CCTV cameras, and the fuse box.</li>
+                    <li>Motion and sound sensors display their coverage on the site map after placement.</li>
+                    <li>Newer and reworked locations use the more detailed bird's-eye site map view.</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <main class="container" id="ghost-guide">
+        <div class="section-heading">
+            <p class="eyebrow">Ghost Directory</p>
+            <h2>Ghost Matchups</h2>
+            <p class="section-copy">Filter by evidence above, then use the cards below for definitive tells, hunt patterns, and room behavior.</p>
+        </div>
+        <div id="ghost-empty-state" class="empty-state" hidden>
+            <h3>No ghosts match that filter set</h3>
+            <p>Clear one or more evidence filters or broaden the search term.</p>
+        </div>
+        <div class="ghost-grid" id="ghost-grid">
+
+            <div class="ghost-card">
+                <h2>Banshee</h2>
+                <div class="evidence-list"><span>Ghost Orb</span><span>Ultraviolet</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Has a chance for a unique, scream-like sound on the Parabolic Microphone.</li>
+                    <li><strong>Hunt Behavior:</strong> Fixates on one player (its target) for the entire game. It will ignore other players during a hunt, even if they are closer.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Demon</h2>
+                <div class="evidence-list"><span>Ultraviolet</span><span>Ghost Writing</span><span>Freezing Temperatures</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Hunt Behavior:</strong> Can hunt at 70% sanity normally, or at any percentage using its rare ability.</li>
+                    <li><strong>Tell:</strong> Cooldown between hunts is only 20 seconds. Smudge sticks only stop it for 60 seconds.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Deogen</h2>
+                <div class="evidence-list"><span>Spirit Box</span><span>Ghost Writing</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Guaranteed unique Spirit Box response of heavy breathing when asked a question near the ghost.</li>
+                    <li><strong>Hunt Behavior:</strong> Always knows the player's location. Moves very fast when far away, but slows down to a crawl when it gets close to you. You cannot hide, you must loop it.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Goryo</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Ultraviolet</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> D.O.T.S evidence is ONLY visible through a video camera and when no players are in the room.</li>
+                    <li><strong>Behavior:</strong> Rarely wanders far from its favorite room.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Hantu</h2>
+                <div class="evidence-list"><span>Ultraviolet</span><span>Ghost Orb</span><span>Freezing Temperatures</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Speed:</strong> Speed depends on room temperature. Very fast in cold rooms, slow in warm ones.</li>
+                    <li><strong>Tell:</strong> Emits freezing breath (visible mist) during a hunt in any room if the breaker is off.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Jinn</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Ultraviolet</span><span>Freezing Temperatures</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Strength:</strong> Moves faster when the fuse box is on and it is chasing a distant player.</li>
+                    <li><strong>Weakness:</strong> Turning off the fuse box disables its speed ability.</li>
+                    <li><strong>Ability:</strong> Can zap 25% sanity from a player near it (EMF 2 reading at fuse box).</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Mare</h2>
+                <div class="evidence-list"><span>Spirit Box</span><span>Ghost Orb</span><span>Ghost Writing</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Hunt Behavior:</strong> Hunts at 60% sanity in the dark, but only 40% in the light.</li>
+                    <li><strong>Tell:</strong> Frequently turns off lights and breaks light bulbs. Cannot turn lights ON.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Moroi</h2>
+                <div class="evidence-list"><span>Spirit Box</span><span>Ghost Writing</span><span>Freezing Temperatures</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Weakness:</strong> Becomes "blind" for longer when smudged during a hunt.</li>
+                    <li><strong>Hunt Behavior:</strong> Its speed is tied to the team's average sanity. The lower the sanity, the faster the Moroi.</li>
+                    <li><strong>Curse:</strong> A successful Spirit Box response will curse the player, doubling their passive sanity drain. This can be cured with Sanity Pills.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Myling</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Ultraviolet</span><span>Ghost Writing</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Hunt Behavior:</strong> Very quiet footsteps. You will likely hear its vocalizations before you hear its steps.</li>
+                    <li><strong>Tell:</strong> If you hear footsteps only when your flashlight starts flickering, it's likely a Myling.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Obake</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Ultraviolet</span><span>Ghost Orb</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Can leave a unique 6-fingered handprint on doors/windows.</li>
+                    <li><strong>Ability:</strong> Has a chance to shapeshift into a different ghost model for a split second during a hunt.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Oni</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Freezing Temperatures</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Cannot do the "airball" ghost event. If you see an airball, it's not an Oni.</li>
+                    <li><strong>Hunt Behavior:</strong> Visible for longer periods during the blinking phase of a hunt. Very active when people are nearby.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Onryo</h2>
+                <div class="evidence-list"><span>Spirit Box</span><span>Ghost Orb</span><span>Freezing Temperatures</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Weakness:</strong> Fears fire. A lit candle acts like a crucifix.</li>
+                    <li><strong>Tell:</strong> Blowing out a candle (or it going out) can trigger an instant hunt, even at high sanity.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Phantom</h2>
+                <div class="evidence-list"><span>Spirit Box</span><span>Ultraviolet</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Taking a photo of a Phantom will make it disappear, but the photo will not have the typical ghost distortion.</li>
+                    <li><strong>Ability:</strong> During a hunt, it is less visible, blinking slower/less often than other ghosts.</li>
+                    <li>Looking at a Phantom drops sanity faster than normal.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Poltergeist</h2>
+                <div class="evidence-list"><span>Spirit Box</span><span>Ghost Writing</span><span>Ultraviolet</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Ability:</strong> Can throw multiple objects at once (Multi-throw).</li>
+                    <li><strong>Tell:</strong> Throws objects with significantly more force than other ghosts. Seeing a "pile" of items explode is a dead giveaway.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Raiju</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Ghost Orb</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Strength:</strong> Moves faster during a hunt when near active electronic equipment (player's flashlight, cameras, etc).</li>
+                    <li><strong>Ability:</strong> Can initiate a hunt at 65% average sanity (instead of 50%) if near active electronics.</li>
+                    <li>Causes electronics to flicker from a greater distance during a hunt.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Revenant</h2>
+                <div class="evidence-list"><span>Ghost Orb</span><span>Ghost Writing</span><span>Freezing Temperatures</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Hunt Behavior:</strong> Moves very slowly when it does not have line of sight on a player.</li>
+                    <li><strong>Strength:</strong> Upon seeing a player, it becomes one of the fastest ghosts in the game. The speed change is dramatic and easy to notice.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Shade</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Ghost Writing</span><span>Freezing Temperatures</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Behavior:</strong> Very shy. Hard to find.</li>
+                    <li><strong>Tell:</strong> Will not initiate a hunt if multiple people are in the same room as it.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Spirit</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Spirit Box</span><span>Ghost Writing</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Weakness:</strong> Using a Smudge Stick near a Spirit will prevent it from hunting for <strong>180 seconds</strong>, double the normal duration.</li>
+                    <li>Lacks unique behaviors, making it a "default" ghost. Often identified by ruling out others.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Thaye</h2>
+                <div class="evidence-list"><span>Ghost Orb</span><span>Ghost Writing</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Behavior:</strong> Ages over time. Starts very active and fast. As the match progresses (and players are near), it becomes slow and inactive.</li>
+                    <li><strong>Tell:</strong> Asking "How old are you?" on the Ouija board will show different ages throughout the match.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>The Mimic</h2>
+                <div class="evidence-list"><span>Spirit Box</span><span>Ultraviolet</span><span>Freezing Temperatures</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Will always show <strong>Ghost Orbs</strong> as a fourth, hidden piece of evidence, even on difficulties that hide one evidence.</li>
+                    <li><strong>Ability:</strong> Copies the behaviors and traits of other ghosts, changing every few minutes. Can be a Revenant one minute and a Raiju the next.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>The Twins</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Spirit Box</span><span>Freezing Temperatures</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Behavior:</strong> Interactions often happen in two different locations simultaneously (Main ghost and Decoy).</li>
+                    <li><strong>Hunt Behavior:</strong> Either twin can hunt. The main ghost is slightly slower than average, the decoy is slightly faster.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Wraith</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Spirit Box</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Will not leave UV footprints after stepping in salt. It will still disturb the salt pile. This is a definitive test.</li>
+                    <li><strong>Ability:</strong> Can teleport to a random player, creating an EMF 2 or 5 reading at the player's location.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Yokai</h2>
+                <div class="evidence-list"><span>Spirit Box</span><span>Ghost Orb</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Hunt Behavior:</strong> Can hunt at 80% sanity if players are talking near it.</li>
+                    <li><strong>Weakness:</strong> Has very poor hearing during a hunt. It can only sense your voice/electronics from close range (approx 2.5m).</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Yurei</h2>
+                <div class="evidence-list"><span>Ghost Orb</span><span>Freezing Temperatures</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Ability:</strong> Can drain a significant amount of sanity (15%) by slamming a door fully shut.</li>
+                    <li><strong>Weakness:</strong> Smudging it in its room traps it there, preventing it from wandering for a long time.</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <section id="cursed-possessions-guide" class="container">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 30px; margin-top: 40px;">Cursed Possessions Guide</h2>
+        
+        <div class="ghost-grid" style="margin-bottom: 40px;">
+            <div class="ghost-card">
+                <h3 style="color: #f1fa8c;">Tarot Cards</h3>
+                <ul>
+                    <li><strong>Effect:</strong> Draw 10 cards with random effects (sanity restore, ghost interaction, etc).</li>
+                    <li><strong>Risk:</strong> Can trigger a cursed hunt or instantly kill the player (The Hanged Man).</li>
+                </ul>
+            </div>
+            <div class="ghost-card">
+                <h3 style="color: #bd93f9;">Ouija Board</h3>
+                <ul>
+                    <li><strong>Effect:</strong> Ask questions to get information (Location, Bone, etc) at the cost of sanity.</li>
+                    <li><strong>Risk:</strong> Breaks and starts a cursed hunt if sanity reaches 0 or if you leave without saying "Goodbye".</li>
+                </ul>
+            </div>
+            <div class="ghost-card">
+                <h3 style="color: #ff79c6;">Music Box</h3>
+                <ul>
+                    <li><strong>Effect:</strong> Plays a melody. The ghost will sing along, revealing its position.</li>
+                    <li><strong>Risk:</strong> Triggers a cursed hunt if the ghost touches the box or if dropped while playing.</li>
+                </ul>
+            </div>
+            <div class="ghost-card">
+                <h3 style="color: #ffb86c;">Monkey Paw</h3>
+                <ul>
+                    <li><strong>Effect:</strong> Grants wishes (Revive player, See ghost, etc).</li>
+                    <li><strong>Risk:</strong> Every wish has a severe negative side effect (Blindness, 1 HP, Locked doors).</li>
+                </ul>
+            </div>
+            <div class="ghost-card">
+                <h3 style="color: #8be9fd;">Haunted Mirror</h3>
+                <ul>
+                    <li><strong>Effect:</strong> Shows a live view of the ghost's room.</li>
+                    <li><strong>Risk:</strong> Rapidly drains sanity. Breaks and hunts if sanity hits 0.</li>
+                </ul>
+            </div>
+            <div class="ghost-card">
+                <h3 style="color: #ff5555;">Summoning Circle</h3>
+                <ul>
+                    <li><strong>Effect:</strong> Lighting 5 candles summons the ghost for a photo opportunity.</li>
+                    <li><strong>Risk:</strong> Ghost is trapped for 5 seconds, then immediately starts a cursed hunt.</li>
+                </ul>
+            </div>
+            <div class="ghost-card">
+                <h3 style="color: #50fa7b;">Voodoo Doll</h3>
+                <ul>
+                    <li><strong>Effect:</strong> Pushing pins forces ghost interactions.</li>
+                    <li><strong>Risk:</strong> Pushing the heart pin starts a cursed hunt. Drains sanity with each use.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="map-selector-container" style="text-align: center; margin-bottom: 30px;">
+            <div id="map-buttons" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <!-- Buttons will be injected here by JS -->
+            </div>
+        </div>
+
+        <div id="cursed-locations-display" class="ghost-card" style="display: none; margin-bottom: 40px; border-color: var(--accent-purple); position: relative;">
+            <button id="close-map-display" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; color: var(--text-secondary); font-size: 2rem; cursor: pointer; line-height: 1;" title="Close">&times;</button>
+            <h2 id="selected-map-title" style="color: var(--accent-purple); padding-right: 40px;">Map Name</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+                <ul id="selected-map-items" style="list-style: none; padding: 0; flex: 1; min-width: 250px;">
+                    <!-- Items injected here -->
+                </ul>
+                <div id="selected-map-image-container" style="flex: 1; min-width: 250px; display: none;">
+                    <img id="selected-map-image" src="" alt="Map Location Guide" style="width: 100%; height: auto; border: 2px solid var(--border-color);">
+                </div>
+            </div>
+        </div>
+
+        <div id="item-selector-container" style="text-align: center; margin-bottom: 30px;">
+            <div id="item-buttons" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+                <!-- Item buttons will be injected here by JS -->
+            </div>
+        </div>
+
+        <div id="item-locations-display" class="ghost-card" style="display: none; margin-bottom: 40px; border-color: var(--accent-green); position: relative;">
+            <button id="close-item-display" style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; color: var(--text-secondary); font-size: 2rem; cursor: pointer; line-height: 1;" title="Close">&times;</button>
+            <h2 id="selected-item-title" style="color: var(--accent-green);">Item Name</h2>
+            <div id="item-info-container" style="margin-bottom: 20px;">
+                <!-- Description injected here -->
+            </div>
+            <h3 style="color: var(--text-secondary); margin-bottom: 10px;">Possible Spawn Locations</h3>
+            <ul id="selected-item-locations" style="list-style: none; padding: 0; column-count: 2; column-gap: 20px;">
+                <!-- Locations injected here -->
+            </ul>
+        </div>
+
+    </section>
+
+    <section id="equipment-guide" class="container">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 30px; margin-top: 40px;">Equipment Tiers Guide</h2>
+        <div class="ghost-grid">
+
+            <div class="ghost-card">
+                <h3>EMF Reader</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Basic meter with a needle. Beeps increase with EMF level. Short range.</li>
+                    <li><strong>Tier II:</strong> Digital display shows the exact EMF value. Increased range and accuracy.</li>
+                    <li><strong>Tier III:</strong> Large screen can detect multiple EMF sources, shows direction, and has the largest range.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Thermometer</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Slow to update temperature. Must be held to read.</li>
+                    <li><strong>Tier II:</strong> Faster temperature updates with a digital screen.</li>
+                    <li><strong>Tier III:</strong> Instant readings. Can scan an area for the coldest spot and provides a temperature range.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Spirit Box</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Handheld device with short range. Requires lights to be off in the room.</li>
+                    <li><strong>Tier II:</strong> Clearer audio and slightly increased range.</li>
+                    <li><strong>Tier III:</strong> Greatly increased range and significantly reduced static. Provides a visual display for responses.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Ghost Writing Book</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> A small notebook with a limited interaction range.</li>
+                    <li><strong>Tier II:</strong> A larger leather journal with an increased interaction range.</li>
+                    <li><strong>Tier III:</strong> A large grimoire with a very large interaction range. Can force a ghost interaction for a sanity cost.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>UV Light</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> A standard UV flashlight with a focused beam.</li>
+                    <li><strong>Tier II:</strong> A glowstick that provides area lighting. Can be placed or held.</li>
+                    <li><strong>Tier III:</strong> A heavy-duty UV flashlight (Pro) with a much wider and brighter beam.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Video Camera</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Standard camera with a grainy image. Must be placed on a surface or tripod.</li>
+                    <li><strong>Tier II:</strong> Better image quality and can be mounted on walls/surfaces.</li>
+                    <li><strong>Tier III:</strong> High-definition camera with an integrated, remotely rotatable tripod base.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>D.O.T.S. Projector</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> A small, placeable laser grid projector with a limited cone.</li>
+                    <li><strong>Tier II:</strong> Wider projection area and can be mounted on walls/surfaces.</li>
+                    <li><strong>Tier III:</strong> A large, placeable scanner that covers a huge area and can highlight detected silhouettes.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Salt</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> A container with 2 charges. Creates small piles that show footprints.</li>
+                    <li><strong>Tier II:</strong> A container with 3 charges. Creates larger piles that also slow the ghost if it steps in them.</li>
+                    <li><strong>Tier III:</strong> A container with 3 charges. Creates lines of salt that the ghost cannot cross during a hunt (Wraiths are an exception).</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Crucifix</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Prevents a hunt within a 3m radius. Has 1 use.</li>
+                    <li><strong>Tier II:</strong> Increased 4m radius. Has 1 use.</li>
+                    <li><strong>Tier III:</strong> Greatly increased 5m radius. Prevents cursed hunts. Has 2 uses before breaking.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Flashlight</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Small, weak beam. Low intensity.</li>
+                    <li><strong>Tier II:</strong> Tactical light. Brighter, wider beam.</li>
+                    <li><strong>Tier III:</strong> Heavy duty. Very bright, wide beam.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Firelight</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Candle. Short duration, low light. Provides sanity protection.</li>
+                    <li><strong>Tier II:</strong> Lantern. Medium duration, better light.</li>
+                    <li><strong>Tier III:</strong> Waterproof Lantern. Long duration, best light. Works in rain.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Igniter</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Matches. 10 uses. Short burn time.</li>
+                    <li><strong>Tier II:</strong> Lighter. 10 minute duration.</li>
+                    <li><strong>Tier III:</strong> High-powered Igniter. 10 minute duration, waterproof, instant use.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Incense</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Smudge Stick. Confuses ghost for 6s during hunt.</li>
+                    <li><strong>Tier II:</strong> Confuses ghost for longer. Slows ghost during hunt.</li>
+                    <li><strong>Tier III:</strong> Freezes ghost in place for a short time during hunt.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Motion Sensor</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Linear beam sensor.</li>
+                    <li><strong>Tier II:</strong> Cone-shaped sensor with visual indicator.</li>
+                    <li><strong>Tier III:</strong> Circular sensor that tracks ghost position on map.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Parabolic Microphone</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Small dish. High background noise.</li>
+                    <li><strong>Tier II:</strong> Larger dish. Reduced noise. Display screen.</li>
+                    <li><strong>Tier III:</strong> High-tech sensor. Visualizes sound location.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Photo Camera</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Polaroid. Slow recharge, long delay.</li>
+                    <li><strong>Tier II:</strong> Digital. Faster recharge, display screen.</li>
+                    <li><strong>Tier III:</strong> Pro DSLR. Very fast recharge, minimal delay.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Sanity Medication</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Sanity Oil. Restores sanity slowly over time.</li>
+                    <li><strong>Tier II:</strong> Sanity Pills. Restores sanity quickly.</li>
+                    <li><strong>Tier III:</strong> Sanity Injection. Instantly restores sanity and provides sprint boost.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Sound Sensor</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Small range area microphone.</li>
+                    <li><strong>Tier II:</strong> Adjustable range.</li>
+                    <li><strong>Tier III:</strong> Large range, tracks multiple sounds.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Tripod</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Basic tripod. Can be knocked over by the ghost.</li>
+                    <li><strong>Tier II:</strong> Sturdy tripod. Cannot be knocked over.</li>
+                    <li><strong>Tier III:</strong> Motorized tripod. Allows rotation of attached cameras.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h3>Head Gear</h3>
+                <ul>
+                    <li><strong>Tier I:</strong> Head Camera. Video feed only.</li>
+                    <li><strong>Tier II:</strong> Headlamp. Light source.</li>
+                    <li><strong>Tier III:</strong> Night Vision Goggles. See in dark without light.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="maps-guide" class="container map-guide-section">
+        <div class="section-heading">
+            <p class="eyebrow">Current Locations</p>
+            <h2>Map Planner</h2>
+            <p class="section-copy">Filter the active map pool by size and open a tactical note for search flow, pressure points, and the best use case for each location.</p>
+        </div>
+        <div class="map-summary-grid">
+            <article class="summary-card">
+                <span class="summary-value">14</span>
+                <span class="summary-label">Current maps</span>
+                <p>Seven small, five medium, and two large locations in the live rotation.</p>
+            </article>
+            <article class="summary-card">
+                <span class="summary-value">9 / 8 / 7</span>
+                <span class="summary-label">Light limits</span>
+                <p>Small, medium, and large maps overload the breaker at different active light counts.</p>
+            </article>
+            <article class="summary-card">
+                <span class="summary-value">5</span>
+                <span class="summary-label">Outdoor zones</span>
+                <p>Bleasdale, Camp Woodwind, Maple Lodge, Point Hope, and Sunny Meadows can place the ghost outside.</p>
+            </article>
+        </div>
+        <div id="map-filter-bar" class="map-filter-bar" aria-label="Map size filters">
+            <button class="map-size-btn active" data-size="all">All Maps</button>
+            <button class="map-size-btn" data-size="Small">Small</button>
+            <button class="map-size-btn" data-size="Medium">Medium</button>
+            <button class="map-size-btn" data-size="Large">Large</button>
+        </div>
+        <div class="map-explorer">
+            <div id="map-directory" class="map-directory"></div>
+            <aside id="map-spotlight" class="map-spotlight ghost-card" aria-live="polite">
+                <p class="map-spotlight-label">Select a map</p>
+                <h3>Current tactical note</h3>
+                <p>Pick a map from the directory to open a focused breakdown for route planning and hunt safety.</p>
+            </aside>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>This guide is a supplementary tool. The in-game journal is the primary source of truth.</p>
+            <p>Not affiliated with Kinetic Games.</p>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Go to top">▲ Top</button></body>
+</html>
+
+
