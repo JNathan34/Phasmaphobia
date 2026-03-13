@@ -35,7 +35,7 @@
                     <p class="panel-label">Guide Snapshot</p>
                     <div class="hero-stats">
                         <div class="hero-stat">
-                            <span id="hero-ghost-count" class="hero-stat-value">24</span>
+                            <span id="hero-ghost-count" class="hero-stat-value">27</span>
                             <span class="hero-stat-label">Ghosts</span>
                         </div>
                         <div class="hero-stat">
@@ -51,7 +51,7 @@
                             <span class="hero-stat-label">Map Sizes</span>
                         </div>
                     </div>
-                    <p class="hero-note">Map roster cross-checked on March 5, 2026, including the current Nell's Diner entry and the reworked 6 Tanglewood Drive layout.</p>
+                    <p class="hero-note">Roster cross-checked on March 12, 2026, including the Winter's Jest ghost trio (Dayan, Gallu, Obambo), the current Nell's Diner entry, and the reworked 6 Tanglewood Drive layout.</p>
                 </aside>
             </div>
             <div class="hero-tools">
@@ -117,6 +117,18 @@
             <h2>Ghost Matchups</h2>
             <p class="section-copy">Filter by evidence above, then use the cards below for definitive tells, hunt patterns, and room behavior.</p>
         </div>
+        <div class="ghost-controls" id="ghost-controls" aria-label="Ghost directory controls">
+            <div class="ghost-controls-actions">
+                <button type="button" class="ghost-control-btn" id="ghost-collapse-all-btn">Collapse all</button>
+                <button type="button" class="ghost-control-btn" id="ghost-expand-all-btn">Expand all</button>
+            </div>
+            <div class="ghost-controls-jump">
+                <label class="ghost-jump-label" for="ghost-jump-select">Jump to</label>
+                <select id="ghost-jump-select" class="ghost-jump-select">
+                    <option value="">Select a ghost…</option>
+                </select>
+            </div>
+        </div>
         <div id="ghost-empty-state" class="empty-state" hidden>
             <h3>No ghosts match that filter set</h3>
             <p>Clear one or more evidence filters or broaden the search term.</p>
@@ -130,6 +142,16 @@
                 <ul>
                     <li><strong>Tell:</strong> Has a chance for a unique, scream-like sound on the Parabolic Microphone.</li>
                     <li><strong>Hunt Behavior:</strong> Fixates on one player (its target) for the entire game. It will ignore other players during a hunt, even if they are closer.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Dayan</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Ghost Orb</span><span>Spirit Box</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Becomes more likely to hunt (and moves quicker during hunts) when players keep moving near it.</li>
+                    <li><strong>Weakness:</strong> Staying still near the ghost makes it less likely to hunt and slows it down during hunts.</li>
                 </ul>
             </div>
 
@@ -150,6 +172,16 @@
                 <ul>
                     <li><strong>Tell:</strong> Guaranteed unique Spirit Box response of heavy breathing when asked a question near the ghost.</li>
                     <li><strong>Hunt Behavior:</strong> Always knows the player's location. Moves very fast when far away, but slows down to a crawl when it gets close to you. You cannot hide, you must loop it.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Gallu</h2>
+                <div class="evidence-list"><span>EMF Level 5</span><span>Ultraviolet</span><span>Spirit Box</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Protective tools used against it (incense, crucifix, etc.) can cause it to become enraged, changing how it behaves.</li>
+                    <li><strong>Tell:</strong> Cannot disturb salt piles while enraged, making salt a clean way to confirm its enraged state.</li>
                 </ul>
             </div>
 
@@ -222,6 +254,16 @@
                 <ul>
                     <li><strong>Tell:</strong> Can leave a unique 6-fingered handprint on doors/windows.</li>
                     <li><strong>Ability:</strong> Has a chance to shapeshift into a different ghost model for a split second during a hunt.</li>
+                </ul>
+            </div>
+
+            <div class="ghost-card">
+                <h2>Obambo</h2>
+                <div class="evidence-list"><span>Ghost Writing</span><span>Ultraviolet</span><span>D.O.T.S Projector</span></div>
+                <h3>Identification Clues</h3>
+                <ul>
+                    <li><strong>Tell:</strong> Alternates between calm and aggressive states on a timer, with calm periods showing much higher activity.</li>
+                    <li><strong>Hunt Behavior:</strong> Hunts very early in its aggressive state (up to 65% sanity), but late in its calm state (down to 10% sanity).</li>
                 </ul>
             </div>
 

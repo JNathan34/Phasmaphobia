@@ -436,6 +436,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     initHeroStats();
     initGhostSearchAndFilters();
+    initGhostDirectoryControls();
     initEvidenceColors();
     initScrollToTop();
     initMapLightbox();
@@ -535,6 +536,89 @@
 
     searchBar.addEventListener('input', applyFiltersAndSearch);
     applyFiltersAndSearch();
+  }
+
+  function initGhostDirectoryControls() {
+    const ghostCards = Array.from(document.querySelectorAll('#ghost-grid .ghost-card'));
+    if (ghostCards.length === 0) return;
+
+    const collapseAllBtn = document.getElementById('ghost-collapse-all-btn');
+    const expandAllBtn = document.getElementById('ghost-expand-all-btn');
+    const jumpSelect = document.getElementById('ghost-jump-select');
+
+    const toSlug = (text) =>
+      String(text)
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+
+    const setCollapsed = (card, collapsed) => {
+      card.classList.toggle('is-collapsed', collapsed);
+      const toggleBtn = card.querySelector('.ghost-card-toggle');
+      if (toggleBtn) {
+        toggleBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        toggleBtn.textContent = collapsed ? 'Show details' : 'Hide details';
+      }
+    };
+
+    for (const card of ghostCards) {
+      const name = card.querySelector('h2')?.textContent?.trim();
+      if (!name) continue;
+
+      if (!card.id) card.id = `ghost-${toSlug(name)}`;
+
+      if (jumpSelect) {
+        const option = document.createElement('option');
+        option.value = card.id;
+        option.textContent = name;
+        jumpSelect.appendChild(option);
+      }
+
+      if (!card.querySelector('.ghost-card-toggle')) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.className = 'ghost-card-toggle';
+        toggleBtn.addEventListener('click', () => {
+          const collapsed = card.classList.toggle('is-collapsed');
+          toggleBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+          toggleBtn.textContent = collapsed ? 'Show details' : 'Hide details';
+        });
+
+        const evidenceList = card.querySelector('.evidence-list');
+        if (evidenceList) evidenceList.insertAdjacentElement('afterend', toggleBtn);
+        else card.appendChild(toggleBtn);
+      }
+
+      setCollapsed(card, true);
+    }
+
+    if (collapseAllBtn) {
+      collapseAllBtn.addEventListener('click', () => {
+        ghostCards.forEach((card) => setCollapsed(card, true));
+      });
+    }
+
+    if (expandAllBtn) {
+      expandAllBtn.addEventListener('click', () => {
+        ghostCards.forEach((card) => setCollapsed(card, false));
+      });
+    }
+
+    if (jumpSelect) {
+      jumpSelect.addEventListener('change', () => {
+        const id = jumpSelect.value;
+        if (!id) return;
+
+        const target = document.getElementById(id);
+        if (target) {
+          setCollapsed(target, false);
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        jumpSelect.value = '';
+      });
+    }
   }
 
   function initEvidenceColors() {

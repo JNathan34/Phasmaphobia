@@ -152,6 +152,99 @@ main {
     font-weight: 700;
 }
 
+#ghost-grid .ghost-card {
+    scroll-margin-top: 120px;
+}
+
+.ghost-controls {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border: 2px solid var(--border-color);
+    background-color: rgba(17, 17, 17, 0.92);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 12px;
+    z-index: 50;
+}
+
+.ghost-controls-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.ghost-controls-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.ghost-jump-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.ghost-control-btn {
+    padding: 8px 14px;
+    border-radius: 0;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-card);
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.ghost-control-btn:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+.ghost-jump-select {
+    padding: 8px 12px;
+    border-radius: 0;
+    font-family: 'Roboto Mono', monospace;
+    border: 2px solid var(--border-color);
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    min-width: 220px;
+}
+
+#ghost-grid .ghost-card-toggle {
+    align-self: flex-start;
+    margin-bottom: 8px;
+    padding: 6px 12px;
+    border-radius: 0;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid var(--accent-blue);
+    background-color: transparent;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+}
+
+#ghost-grid .ghost-card-toggle:hover {
+    background-color: var(--accent-blue);
+    color: var(--bg-dark);
+}
+
+#ghost-grid .ghost-card.is-collapsed h3,
+#ghost-grid .ghost-card.is-collapsed ul {
+    display: none;
+}
+
 footer {
     text-align: center;
     padding: 30px 20px;
